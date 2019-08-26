@@ -23,5 +23,12 @@ class _HomepageState extends State<Homepage> {
 
 @override
 Widget build(BuildContext context) {
+  final txtRoute = TextField(
+    decoration: InputDecoration(
+        hintText: "Route",
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+    ),
+  );
 }
 }

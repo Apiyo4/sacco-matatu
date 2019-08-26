@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ca262a55-9ab0-4783-8568-f812c4fb2c2f" name="Default Changelist" comment="" />
+    <list default="true" id="ca262a55-9ab0-4783-8568-f812c4fb2c2f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -17,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/tripDetails.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+            <state relative-caret-position="348">
+              <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -32,6 +34,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/lib/main.dart" />
+        <option value="$PROJECT_DIR$/lib/tripDetails.dart" />
       </list>
     </option>
   </component>
@@ -110,9 +113,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1366" height="768" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Capture Tool" order="1" />
       <window_info id="Captures" order="2" side_tool="true" />
       <window_info id="Resources Explorer" order="3" />
@@ -130,7 +132,7 @@
       <window_info anchor="bottom" id="Flutter Performance" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Logcat" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32919255" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32919255" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="1" />
       <window_info anchor="right" id="Flutter Inspector" order="2" />
@@ -143,8 +145,8 @@
     <entry file="file://$PROJECT_DIR$/lib/main.dart" />
     <entry file="file://$PROJECT_DIR$/lib/tripDetails.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        <state relative-caret-position="348">
+          <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
         </state>
       </provider>
     </entry>
