@@ -16,3 +16,7 @@ class Login extends StatelessWidget {
 
   }
 }
+class LoginPage extends StatefulWidget{
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
