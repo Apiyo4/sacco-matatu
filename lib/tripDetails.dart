@@ -37,5 +37,12 @@ Widget build(BuildContext context) {
         border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
     ),
   );
+  final txtAmount = TextField(
+    decoration: InputDecoration(
+        hintText: "Fare",
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+    ),
+  );
 }
 }
