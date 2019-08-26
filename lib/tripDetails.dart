@@ -20,4 +20,8 @@ class Homepage extends StatefulWidget {
 }
 class _HomepageState extends State<Homepage> {
   String strStringData = "Trip Details";
+
+@override
+Widget build(BuildContext context) {
+}
 }
