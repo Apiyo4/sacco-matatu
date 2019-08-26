@@ -51,4 +51,40 @@ class _SignupPageState extends State<SignupPage> {
     bottomLeft: Radius.circular(90),
 
     )
+    ),child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+    Spacer(),
+
+
+
+    Align(
+    alignment: Alignment.center,
+    child: Icon(Icons.person,
+    size: 90,
+    color: Colors.white,
+    ),
+    ),
+    Spacer(),
+
+
+
+
+    Align(
+    alignment: Alignment.bottomRight,
+    child: Padding(
+    padding: const EdgeInsets.only(
+    bottom: 32,
+    right: 32
+    ),
+    child: Text('Signup',
+    style: TextStyle(
+    color: Colors.white,
+    fontSize: 18
+    ),
+    ),
+    ),
+    ),
+    ],
+    ),
     ),
