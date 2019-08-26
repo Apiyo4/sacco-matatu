@@ -65,5 +65,12 @@ Widget build(BuildContext context) {
         border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
     ),
   );
+  final txtAsset = TextField(
+    decoration: InputDecoration(
+        hintText: "Pick an asset",
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+    ),
+  );
 }
 }
