@@ -94,6 +94,12 @@ Widget build(BuildContext context) {
       shrinkWrap: true,
       padding: EdgeInsets.only(left: 25.0, right: 25.0),
       children: <Widget>[
+        new Text(strStringData,
+          style: new TextStyle(
+              color: Color.fromARGB(0xFF, 0x42, 0xA5, 0xF5) ,
+              fontSize: 40.00
+          ),
+        ),
 
       ],),),
 
