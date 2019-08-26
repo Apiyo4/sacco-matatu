@@ -100,6 +100,7 @@ Widget build(BuildContext context) {
               fontSize: 40.00
           ),
         ),
+        txtRoute,
 
       ],),),
 
