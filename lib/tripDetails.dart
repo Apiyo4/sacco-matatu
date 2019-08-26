@@ -58,6 +58,12 @@ Widget build(BuildContext context) {
         border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
     ),
   );
-
+  final txtConductor = TextField(
+    decoration: InputDecoration(
+        hintText: "Name of conductor",
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+    ),
+  );
 }
 }
