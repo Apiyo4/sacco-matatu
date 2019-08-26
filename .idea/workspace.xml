@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ca262a55-9ab0-4783-8568-f812c4fb2c2f" name="Default Changelist" comment="" />
+    <list default="true" id="ca262a55-9ab0-4783-8568-f812c4fb2c2f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/lib/tripDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tripDetails.dart" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -18,7 +20,7 @@
         <entry file="file://$PROJECT_DIR$/lib/tripDetails.dart">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="318">
-              <caret line="71" column="35" lean-forward="true" selection-start-line="71" selection-start-column="35" selection-end-line="71" selection-end-column="35" />
+              <caret line="90" column="6" lean-forward="true" selection-start-line="90" selection-start-column="6" selection-end-line="90" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -36,7 +38,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="684" />
     <option name="width" value="672" />
     <option name="height" value="768" />
@@ -110,7 +112,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-1" width="1366" height="768" extended-state="6" />
+    <frame x="0" y="-1" width="1366" height="768" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Capture Tool" order="1" />
@@ -144,7 +147,7 @@
     <entry file="file://$PROJECT_DIR$/lib/tripDetails.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="318">
-          <caret line="71" column="35" lean-forward="true" selection-start-line="71" selection-start-column="35" selection-end-line="71" selection-end-column="35" />
+          <caret line="90" column="6" lean-forward="true" selection-start-line="90" selection-start-column="6" selection-end-line="90" selection-end-column="6" />
         </state>
       </provider>
     </entry>

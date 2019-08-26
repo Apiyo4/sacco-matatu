@@ -85,5 +85,11 @@ Widget build(BuildContext context) {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
 
   );
+  return new Scaffold(
+    appBar: new AppBar(
+        title: new Text("Matatu Sacco")
+    ),
+
+  );
 }
 }
