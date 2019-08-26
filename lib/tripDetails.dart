@@ -102,6 +102,8 @@ Widget build(BuildContext context) {
         ),
         txtRoute,
         txtPassengers,
+        txtAmount,
+
       ],),),
 
   );
