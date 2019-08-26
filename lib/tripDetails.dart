@@ -89,6 +89,13 @@ Widget build(BuildContext context) {
     appBar: new AppBar(
         title: new Text("Matatu Sacco")
     ),
+      body: new Center(
+      child: new ListView(
+      shrinkWrap: true,
+      padding: EdgeInsets.only(left: 25.0, right: 25.0),
+      children: <Widget>[
+
+      ],),),
 
   );
 }
