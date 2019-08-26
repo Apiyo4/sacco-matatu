@@ -87,4 +87,191 @@ class _SignupPageState extends State<SignupPage> {
     ),
     ],
     ),
+    ),Container(
+        height: MediaQuery.of(context).size.height/2,
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.only(top: 40),
+        child: Column(
+
+
+          children: <Widget>[
+//
+//
+//
+//                    Container(
+//                      width: MediaQuery.of(context).size.width/1.2,
+//                      height: 45,
+//                      padding: EdgeInsets.only(
+//                          top: 4,left: 16, right: 16, bottom: 4
+//                      ),
+//                      decoration: BoxDecoration(
+//                          borderRadius: BorderRadius.all(
+//                              Radius.circular(50)
+//                          ),
+//                          color: Colors.white,
+//                          boxShadow: [
+//                            BoxShadow(
+//                                color: Colors.black12,
+//                                blurRadius: 5
+//                            )
+//                          ]
+//                      ),
+//                      child: TextField(
+//                        decoration: InputDecoration(
+//                          border: InputBorder.none,
+//                          icon: Icon(Icons.face,
+//                            color: Colors.grey,
+//                          ),
+//                          hintText: 'Staff ID',
+//                        ),
+//                      ),
+//                    ),
+//
+
+
+
+            Container(
+              width: MediaQuery.of(context).size.width/1.2,
+              height: 45,
+              margin: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.only(
+                  top: 4,left: 16, right: 16, bottom: 4
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(50)
+                  ),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 5
+                    )
+                  ]
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  icon: Icon(Icons.email,
+                    color: Colors.grey,
+                  ),
+                  hintText: 'Email',
+                ),
+              ),
+            ),
+
+
+
+
+            Container(
+              width: MediaQuery.of(context).size.width/1.2,
+              height: 45,
+              margin: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.only(
+                  top: 4,left: 16, right: 16, bottom: 4
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(50)
+                  ),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 5
+                    )
+                  ]
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  icon: Icon(Icons.vpn_key,
+                    color: Colors.grey,
+                  ),
+                  hintText: 'Password',
+                ),
+              ),
+            ),
+
+
+
+
+            Container(
+              width: MediaQuery.of(context).size.width/1.2,
+              height: 45,
+              margin: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.only(
+                  top: 4,left: 16, right: 16, bottom: 4
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(50)
+                  ),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 5
+                    )
+                  ]
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Password Confirmation',
+                ),
+              ),
+            ),
+
+
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: 16, right: 32
+                ),
+              ),
+            ),
+            Spacer(),
+
+            Container(
+              height: 45,
+              width: MediaQuery.of(context).size.width/1.2,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF2D2B60 ),
+                      Color(0xFF2596A8)
+                    ],
+                  ),
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(50)
+                  )
+              ),
+              child: Center(
+                child: Text('Signup'.toUpperCase(),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      )
+    ],
     ),
+    ),
+        ),
+        ),
+    );
+  }
+}
+
+
+
+
+
+
+
