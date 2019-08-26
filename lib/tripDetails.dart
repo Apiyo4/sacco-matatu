@@ -104,6 +104,7 @@ Widget build(BuildContext context) {
         txtPassengers,
         txtAmount,
         txtStation,
+        txtDriver,
 
       ],),),
 
