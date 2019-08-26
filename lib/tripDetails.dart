@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/records.dart';
 class TripDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,7 @@ Widget build(BuildContext context) {
   final btnSubmit = RaisedButton(
     color: Colors.white,
     onPressed:(){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> TripDeta()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Records()));
     },
     child: Text("Submit", style: new TextStyle(
       color: Colors.yellow,
@@ -112,3 +112,4 @@ Widget build(BuildContext context) {
   );
 }
 }
+
