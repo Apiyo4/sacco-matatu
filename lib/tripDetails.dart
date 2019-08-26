@@ -44,5 +44,12 @@ Widget build(BuildContext context) {
         border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
     ),
   );
+  final txtStation = TextField(
+    decoration: InputDecoration(
+        hintText: "Station",
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+    ),
+  );
 }
 }
