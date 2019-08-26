@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class records extends StatelessWidget
+class RecordsPage extends StatelessWidget
 {
-//  Records():super(builder: BuildContext context)
+//  RecordsPage():super(builder: BuildContext context)
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
