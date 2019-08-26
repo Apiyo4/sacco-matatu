@@ -72,5 +72,18 @@ Widget build(BuildContext context) {
         border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
     ),
   );
+  final btnSubmit = RaisedButton(
+    color: Colors.white,
+    onPressed:(){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> TripDeta()));
+    },
+    child: Text("Submit", style: new TextStyle(
+      color: Colors.yellow,
+      fontSize: 18.00,
+    ),
+    ),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
+
+  );
 }
 }
