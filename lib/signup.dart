@@ -25,3 +25,30 @@ class _SignupPageState extends State<SignupPage> {
     SystemChrome.setEnabledSystemUIOverlays([]);
     super.initState();
   }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: SingleChildScrollView(
+        child: ConstrainedBox(
+        constraints: BoxConstraints(),
+    child: Container(
+    child: Column(
+    children: <Widget>[
+    Container(
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height/2.5,
+    decoration: BoxDecoration(
+    gradient: LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    colors: [
+    Color(0xFF2D2B60),
+    Color(0xFF2596A8)
+    ],
+    ),
+    borderRadius: BorderRadius.only(
+    bottomLeft: Radius.circular(90),
+
+    )
+    ),
