@@ -14,3 +14,10 @@ class TripDetails extends StatelessWidget {
     );
   }
 }
+class Homepage extends StatefulWidget {
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+class _HomepageState extends State<Homepage> {
+  String strStringData = "Trip Details";
+}
