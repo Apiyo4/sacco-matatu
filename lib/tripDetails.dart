@@ -105,6 +105,7 @@ Widget build(BuildContext context) {
         txtAmount,
         txtStation,
         txtDriver,
+        txtConductor,
 
       ],),),
 
