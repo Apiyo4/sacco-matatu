@@ -1,4 +1,4 @@
-import 'package:first_app/signup.dart';
+import 'package:flutter_app/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

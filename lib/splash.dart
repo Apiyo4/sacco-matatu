@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'package:flutter_app/loader.dart';
+
 import 'package:flutter/material.dart';
 class Splash extends StatefulWidget {
   @override

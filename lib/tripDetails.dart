@@ -21,6 +21,7 @@ class Homepage extends StatefulWidget {
 }
 class _HomepageState extends State<Homepage> {
   String strStringData = "Trip Details";
+  String dropdownValue;
 
 @override
 Widget build(BuildContext context) {
@@ -66,12 +67,38 @@ Widget build(BuildContext context) {
         border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
     ),
   );
-  final txtAsset = TextField(
-    decoration: InputDecoration(
-        hintText: "Pick an asset",
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
-    ),
+  final txtAsset = FormField<String>(
+    builder: (FormFieldState<String> state) {
+      return InputDecorator(
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 3.0),
+            errorStyle: TextStyle(color: Colors.redAccent, fontSize: 16.0),
+            hintText: 'Please select expense',
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0))),
+        isEmpty: dropdownValue == '',
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton<String>(
+            hint: new Text('Number plate'),
+            value: dropdownValue,
+            isDense: true,
+            onChanged: (String newValue) {
+              setState(() {
+                dropdownValue = newValue;
+                state.didChange(newValue);
+              });
+            },
+            items: <String>['One', 'Two', 'Three', 'Four']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            })
+                .toList(),
+          ),
+        ),
+      );
+    },
   );
   final btnSubmit = RaisedButton(
     color: Colors.white,
