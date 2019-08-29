@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 class Signup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,6 +22,12 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+
+  TextEditingController _emailRegisterController = new TextEditingController();
+  TextEditingController _usernameRegisterController = new TextEditingController();
+  TextEditingController  _passwordRegisterController= new TextEditingController();
+  TextEditingController  _passwordConfirmRegisterController= new TextEditingController();
+
 
   @override
   void initState() {
@@ -249,10 +258,16 @@ class _SignupPageState extends State<SignupPage> {
                   )
               ),
               child: Center(
-                child: Text('Signup'.toUpperCase(),
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold
+
+                child: InkWell(
+                  onTap: (){
+                  Navigator.pushNamed(context, "/details");
+                },
+                  child: Text('Signup'.toUpperCase(),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold
+                    ),
                   ),
                 ),
               ),
