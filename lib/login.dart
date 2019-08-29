@@ -1,6 +1,14 @@
-import 'package:first_app/signup.dart';
+import 'package:flutter_app/api_sevices.dart';
+import 'package:flutter_app/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'constants.dart';
+import 'main.dart';
+
+
+
 
 class Login extends StatelessWidget {
   @override
@@ -20,13 +28,19 @@ class LoginPage extends StatefulWidget{
   @override
   _LoginPageState createState() => _LoginPageState();
 }
-class _LoginPageState extends State<LoginPage>{
+class _LoginPageState extends State<LoginPage> {
+
+
+  TextEditingController _emailController = new TextEditingController();
+  TextEditingController _passwordController = new TextEditingController();
+
 
   @override
   void initState() {
     SystemChrome.setEnabledSystemUIOverlays([]);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +51,14 @@ class _LoginPageState extends State<LoginPage>{
             child: Column(
               children: <Widget>[
                 Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height/2.5,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height / 2.5,
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.centerLeft,
@@ -86,16 +106,25 @@ class _LoginPageState extends State<LoginPage>{
                 ),
 
                 Container(
-                  height: MediaQuery.of(context).size.height/2,
-                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height / 2,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   padding: EdgeInsets.only(top: 62),
                   child: Column(
                     children: <Widget>[
                       Container(
-                        width: MediaQuery.of(context).size.width/1.2,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width / 1.2,
                         height: 45,
                         padding: EdgeInsets.only(
-                            top: 4,left: 16, right: 16, bottom: 4
+                            top: 4, left: 16, right: 16, bottom: 4
                         ),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(
@@ -117,14 +146,18 @@ class _LoginPageState extends State<LoginPage>{
                             ),
                             hintText: 'Email',
                           ),
+                          controller: _emailController,
                         ),
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width/1.2,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width / 1.2,
                         height: 45,
                         margin: EdgeInsets.only(top: 32),
                         padding: EdgeInsets.only(
-                            top: 4,left: 16, right: 16, bottom: 4
+                            top: 4, left: 16, right: 16, bottom: 4
                         ),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(
@@ -146,13 +179,15 @@ class _LoginPageState extends State<LoginPage>{
                             ),
                             hintText: 'Password',
                           ),
+                          controller: _passwordController,
                         ),
                       ),
+
 
                       Align(
                         alignment: Alignment.centerRight,
                         child: InkWell(
-                          onTap: (){
+                          onTap: () {
                             Navigator.pushNamed(context, "/route");
                           },
                           child: Padding(
@@ -171,40 +206,52 @@ class _LoginPageState extends State<LoginPage>{
                       Spacer(),
 
                       Container(
-                        height: 45,
-                        width: MediaQuery.of(context).size.width/1.2,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xFF2D2B60 ),
-                                Color(0xFF2596A8)
-                              ],
-                            ),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(50)
-                            )
-                        ),
-                        child: Center(
-                          child: Text('Login'.toUpperCase(),
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold
-                            ),
+                          height: 45,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 1.2,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color(0xFF2D2B60),
+                                  Color(0xFF2596A8)
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(50)
+                              )
                           ),
 
-                        ),
+                          child: Center(
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context, "/details");
+                                },
+
+                                child: Text('Login'.toUpperCase(),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold
+                                  ),
+                                ),
+
+                              )
+                          )
+
 
                       ),
                       Container(
                         alignment: Alignment.center,
                         child: InkWell(
-                          onTap: (){
+                          onTap: () {
                             Navigator.pushNamed(context, "/signup");
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 top: 16, right: 32
-                            ),
+                            )
+                            ,
                             child: Text("Don't have an Account? Create one",
                               style: TextStyle(
                                   color: Colors.grey
@@ -225,9 +272,6 @@ class _LoginPageState extends State<LoginPage>{
       ),
     );
   }
+
+
 }
-
-
-
-
-
