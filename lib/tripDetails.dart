@@ -156,9 +156,10 @@ class _PageOneState extends State<PageOne> {
     );
     final btnSubmit = RaisedButton(
       color: Colors.white,
-      onPressed:(){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> RecordsPage()));
-      },
+//      onPressed:(){
+//        Navigator.push(context, MaterialPageRoute(builder: (context)=> RecordsPage()));
+//      },
+      onPressed: () => _showToast(context),
       child: Text("Submit", style: new TextStyle(
         color: Colors.yellow,
         fontSize: 18.00,
@@ -197,6 +198,16 @@ class _PageOneState extends State<PageOne> {
         btnSubmit
 
       ],
+    );
+  }
+  void _showToast(BuildContext context) {
+    final scaffold = Scaffold.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: const Text('Trip details saved'),
+        action: SnackBarAction(
+            label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+      ),
     );
   }
 }
