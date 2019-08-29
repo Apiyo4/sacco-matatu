@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/recordsPage.dart';
+import 'dart:async';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class TripDetails extends StatelessWidget {
   @override
@@ -39,9 +42,9 @@ class _HomepageState extends State<Homepage> {
 Widget build(BuildContext context) {
 
   return new Scaffold(
-    appBar: new AppBar(
-        title: new Text("Matatu Sacco")
-    ),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF258EA3),
+      ),
       body: currentPage,
     bottomNavigationBar: BottomNavigationBar(
       currentIndex: currentTab,
@@ -168,36 +171,39 @@ class _PageOneState extends State<PageOne> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
 
     );
-    return   new ListView(
-      shrinkWrap: true,
-      padding: EdgeInsets.only(left: 25.0, right: 25.0),
-      children: <Widget>[
-        new Text(strStringData,
-          style: new TextStyle(
-              color: Color.fromARGB(0xFF, 0x42, 0xA5, 0xF5) ,
-              fontSize: 40.00
-          ),
-        ),
+    return   new Center(
+       child : new ListView(
+          shrinkWrap: true,
+          padding: EdgeInsets.only(left: 25.0, right: 25.0),
+          children: <Widget>[
+            new Text(strStringData,
+              style: new TextStyle(
+                  color: Color.fromARGB(0xFF, 0x42, 0xA5, 0xF5) ,
+                  fontSize: 40.00
+              ),
+            ),
 
-        SizedBox(height: 20.0,
-        ),
-        txtRoute,
-        SizedBox(height: 8.0,),
-        txtPassengers,
-        SizedBox(height: 8.0,),
-        txtAmount,
-        SizedBox(height: 8.0,),
-        txtStation,
-        SizedBox(height: 8.0,),
-        txtDriver,
-        SizedBox(height: 8.0,),
-        txtConductor,
-        SizedBox(height: 8.0,),
-        txtAsset,
-        SizedBox(height: 20.0,),
-        btnSubmit
+            SizedBox(height: 20.0,
+            ),
+            txtRoute,
+            SizedBox(height: 8.0,),
+            txtPassengers,
+            SizedBox(height: 8.0,),
+            txtAmount,
+            SizedBox(height: 8.0,),
+            txtStation,
+            SizedBox(height: 8.0,),
+            txtDriver,
+            SizedBox(height: 8.0,),
+            txtConductor,
+            SizedBox(height: 8.0,),
+            txtAsset,
+            SizedBox(height: 20.0,),
+            btnSubmit
 
-      ],
+          ],
+
+        ),
     );
   }
   void _showToast(BuildContext context) {
@@ -218,17 +224,56 @@ class PageTwo extends StatefulWidget {
 }
 
 class _PageTwoState extends State<PageTwo> {
+  Future<List<Trip>> _getTrips() async{
+    var data = await http.get("https://prodevmatatu.herokuapp.com/api/trip");
+    var jsonData = json.decode(data.body);
+    List<Trip> trips = [];
+    for(var t in jsonData){
+      Trip trip = Trip(t["station"], t["number_plate"], t["passengers"], t["id"], t["time"], t["route"], t["fare"]);
+      trips.add(trip);
+    }
+    print(trips.length);
+    return trips;
+  }
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "Matatu Sacco",
-        home: new Text("Hello"),
-        theme: new ThemeData(
-            brightness: Brightness.light,
-            primaryColor: Colors.tealAccent
-        )
+    return  Container(
+
+        child: FutureBuilder(
+            future: _getTrips(),
+            builder:(BuildContext context, AsyncSnapshot snapshot){
+              if(snapshot.data==null){
+                return Container(
+                  child: Center(
+                    child: Text("Loading..."),
+                  ),
+                );
+              }else {
+                return ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text(snapshot.data[index].route),
+                    );
+                  },
+                );
+              }
+            } )
     );
   }
 }
+class Trip{
+  final String station;
+  final String number_plate;
+  final int passengers;
+  final int id;
+  final String time;
+  final String route;
+  final int fare;
+  Trip(this.station, this.number_plate, this.passengers, this.id, this.time, this.route, this.fare);
+}
+
+
+
+
+
