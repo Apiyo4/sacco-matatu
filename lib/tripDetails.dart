@@ -1,5 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_app/recordsPage.dart';
+
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -15,6 +17,7 @@ class TripDetails extends StatelessWidget {
             brightness: Brightness.light,
             primaryColor: Colors.tealAccent
         )
+
     );
   }
 }
@@ -22,7 +25,10 @@ class Homepage extends StatefulWidget {
   @override
   _HomepageState createState() => _HomepageState();
 }
+
 class _HomepageState extends State<Homepage> {
+//  String strStringData = "Trip Details";
+//  String dropdownValue;
   int currentTab = 0;
   PageOne one;
   PageTwo two;
@@ -38,36 +44,40 @@ class _HomepageState extends State<Homepage> {
     super.initState();
   }
 
-@override
-Widget build(BuildContext context) {
 
-  return new Scaffold(
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF258EA3),
       ),
-      body: currentPage,
-    bottomNavigationBar: BottomNavigationBar(
-      currentIndex: currentTab,
-      onTap: (int index){
-        setState(() {
-          currentTab = index;
-          currentPage = pages[index];
-        });
 
-      },
-      items: [
-        BottomNavigationBarItem(
-            title: Text("Add trip details"),
-            icon: Icon(Icons.add)
-        ),
-        BottomNavigationBarItem(
-            title: Text("View Details"),
-            icon: Icon(Icons.remove_red_eye)
-        ),
-      ],
-    ),
-  );
-}
+      body: currentPage,
+//
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentTab,
+        onTap: (int index){
+          setState(() {
+            currentTab = index;
+            currentPage = pages[index];
+          });
+
+        },
+        items: [
+          BottomNavigationBarItem(
+              title: Text("Add trip details"),
+              icon: Icon(Icons.add)
+          ),
+          BottomNavigationBarItem(
+              title: Text("View Details"),
+              icon: Icon(Icons.remove_red_eye)
+          ),
+        ],
+      ),
+    );
+  }
+
+
 
 }
 class PageOne extends StatefulWidget {
@@ -78,51 +88,62 @@ class PageOne extends StatefulWidget {
 class _PageOneState extends State<PageOne> {
   String strStringData = "Trip Details";
   String dropdownValue;
+  final formKey = GlobalKey<FormState>();
   @override
-
-
   Widget build(BuildContext context) {
-    final txtRoute = TextField(
+    final txtRoute = TextFormField(
+      autocorrect: false,
       decoration: InputDecoration(
-          hintText: "Route",
+          labelText: "Route",
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
+      validator: (str)=> str.length <=5 ? "Not a valid route!" : null,
     );
-    final txtPassengers = TextField(
+    final txtPassengers = TextFormField(
+      autocorrect: false,
       decoration: InputDecoration(
-          hintText: "Number of Passengers",
+          labelText: "Number of Passengers",
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
+      validator: (str)=> str.length < 1 ? "Not a valid number of passengers!" : null,
     );
-    final txtAmount = TextField(
+    final txtAmount = TextFormField(
+      autocorrect: false,
       decoration: InputDecoration(
-          hintText: "Fare",
+          labelText: "Fare",
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
+      validator: (str)=> str.length < 1? "Not a valid fare!" : null,
     );
-    final txtStation = TextField(
+    final txtStation = TextFormField(
+      autocorrect: false,
       decoration: InputDecoration(
-          hintText: "Station",
+          labelText: "Station",
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
+      validator: (str)=> str.length <=5 ? "Not a valid station!" : null,
     );
-    final txtDriver = TextField(
+    final txtDriver = TextFormField(
+      autocorrect: false,
       decoration: InputDecoration(
-          hintText: "Name of driver",
+          labelText: "Name of driver",
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
+      validator: (str)=> str.length <=5 ? "Not a valid name for driver!" : null,
     );
-    final txtConductor = TextField(
+    final txtConductor = TextFormField(
+      autocorrect: false,
       decoration: InputDecoration(
-          hintText: "Name of conductor",
+          labelText: "Name of conductor",
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
+      validator: (str)=> str.length <=5 ? "Not a valid name for conductor!" : null,
     );
     final txtAsset = FormField<String>(
       builder: (FormFieldState<String> state) {
@@ -130,7 +151,6 @@ class _PageOneState extends State<PageOne> {
           decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 3.0),
               errorStyle: TextStyle(color: Colors.redAccent, fontSize: 16.0),
-              hintText: 'Please select expense',
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0))),
           isEmpty: dropdownValue == '',
           child: DropdownButtonHideUnderline(
@@ -159,10 +179,14 @@ class _PageOneState extends State<PageOne> {
     );
     final btnSubmit = RaisedButton(
       color: Colors.white,
-//      onPressed:(){
-//        Navigator.push(context, MaterialPageRoute(builder: (context)=> RecordsPage()));
-//      },
-      onPressed: () => _showToast(context),
+
+      onPressed: () {
+        var form = formKey.currentState;
+        if(form.validate()){
+          return  _showToast(context);
+        }
+
+      },
       child: Text("Submit", style: new TextStyle(
         color: Colors.yellow,
         fontSize: 18.00,
@@ -171,40 +195,82 @@ class _PageOneState extends State<PageOne> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
 
     );
-    return   new Center(
-       child : new ListView(
+    return new Center(
+
+
+      child : new ListView(
           shrinkWrap: true,
           padding: EdgeInsets.only(left: 25.0, right: 25.0),
-          children: <Widget>[
+          children:    <Widget>[
             new Text(strStringData,
               style: new TextStyle(
+
                   color: Color.fromARGB(0xFF, 0x42, 0xA5, 0xF5) ,
                   fontSize: 40.00
               ),
             ),
 
-            SizedBox(height: 20.0,
-            ),
-            txtRoute,
-            SizedBox(height: 8.0,),
-            txtPassengers,
-            SizedBox(height: 8.0,),
-            txtAmount,
-            SizedBox(height: 8.0,),
-            txtStation,
-            SizedBox(height: 8.0,),
-            txtDriver,
-            SizedBox(height: 8.0,),
-            txtConductor,
-            SizedBox(height: 8.0,),
-            txtAsset,
-            SizedBox(height: 20.0,),
-            btnSubmit
+            new Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  txtRoute,
+                  SizedBox(height: 8.0,),
+                  txtPassengers,
+                  SizedBox(height: 8.0,),
+                  txtAmount,
+                  SizedBox(height: 8.0,),
+                  txtStation,
+                  SizedBox(height: 8.0,),
+                  txtDriver,
+                  SizedBox(height: 8.0,),
+                  txtConductor,
+                  SizedBox(height: 8.0,),
+                  txtAsset,
+                  SizedBox(height: 20.0,),
+                  btnSubmit
+                ],
+              ),
 
-          ],
+            )
 
-        ),
+          ]
+
+
+
+
+//            children: <Widget>[
+//              new Text(strStringData,
+//                style: new TextStyle(
+//
+//                    color: Color.fromARGB(0xFF, 0x42, 0xA5, 0xF5) ,
+//                    fontSize: 40.00
+//                ),
+//              ),
+
+//              SizedBox(height: 20.0,
+//              ),
+//              txtRoute,
+//              SizedBox(height: 8.0,),
+//              txtPassengers,
+//              SizedBox(height: 8.0,),
+//              txtAmount,
+//              SizedBox(height: 8.0,),
+//              txtStation,
+//              SizedBox(height: 8.0,),
+//              txtDriver,
+//              SizedBox(height: 8.0,),
+//              txtConductor,
+//              SizedBox(height: 8.0,),
+//              txtAsset,
+//              SizedBox(height: 20.0,),
+//              btnSubmit
+
+//            ],
+      ),
     );
+
   }
   void _showToast(BuildContext context) {
     final scaffold = Scaffold.of(context);
@@ -224,56 +290,206 @@ class PageTwo extends StatefulWidget {
 }
 
 class _PageTwoState extends State<PageTwo> {
-  Future<List<Trip>> _getTrips() async{
-    var data = await http.get("https://prodevmatatu.herokuapp.com/api/trip");
-    var jsonData = json.decode(data.body);
-    List<Trip> trips = [];
-    for(var t in jsonData){
-      Trip trip = Trip(t["station"], t["number_plate"], t["passengers"], t["id"], t["time"], t["route"], t["fare"]);
-      trips.add(trip);
-    }
-    print(trips.length);
-    return trips;
+
+
+  final String url = 'https://prodevmatatu.herokuapp.com/api/trip';
+  List data;
+
+  Future<String> getTrips() async {
+    var res = await http.get(
+        Uri.encodeFull(url), headers: {"Accept": "application/json"});
+    setState(() {
+      var resBody = json.decode(res.body);
+      data = resBody["data"];
+      var passengers = "passengers".toString();
+    });
+
+    return "Success";
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    // TODO: implement build
+    return Scaffold(
+      appBar:
+      AppBar(
 
-        child: FutureBuilder(
-            future: _getTrips(),
-            builder:(BuildContext context, AsyncSnapshot snapshot){
-              if(snapshot.data==null){
-                return Container(
-                  child: Center(
-                    child: Text("Loading..."),
-                  ),
-                );
-              }else {
-                return ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      title: Text(snapshot.data[index].route),
-                    );
-                  },
-                );
-              }
-            } )
+        title: Text("Records",
+          textAlign: TextAlign.center ,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),),
+
+      ),
+      body:
+      ListView.builder(
+          itemCount: data == null ? 0 : data.length,
+          itemBuilder: (BuildContext context, int index) {
+
+            return new Container(
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Card(
+                        child: Container(
+
+                            padding: EdgeInsets.all(15.0),
+                            child: Center(
+                              child: Column(
+                                children: <Widget>[
+
+                                  Row(
+                                    children: <Widget>[
+                                      Text("Time : ",
+                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                                      ),
+                                      Text(data[index]["time"],
+                                        style: TextStyle( fontSize: 18),)
+                                    ],
+
+                                  ),
+                                  SizedBox(height: 8.0,),
+                                  Row(
+                                    children: <Widget>[
+                                      Text("Sacco staff : ",
+                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                      Text(data[index]["staff_name"],
+                                        style: TextStyle(fontSize: 18),)
+                                    ],
+
+                                  ),
+                                  SizedBox(height: 8.0,),
+                                  Row(
+                                    children: <Widget>[
+                                      Text("Route : ",
+                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                      Text(data[index]["route"],
+                                        style: TextStyle( fontSize: 18),)
+                                    ],
+
+                                  ),
+                                  SizedBox(height: 8.0,),
+                                  Row(
+                                    children: <Widget>[
+                                      Text("Driver : ",
+                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                      Text(data[index]["driver"],
+                                        style: TextStyle( fontSize: 18),)
+                                    ],
+
+                                  ),
+                                  SizedBox(height: 8.0,),
+                                  Row(
+                                    children: <Widget>[
+                                      Text("Conductor : ",
+                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                      Text(data[index]["conductor"],
+                                        style: TextStyle( fontSize: 18),)
+                                    ],
+
+                                  ),
+
+                                  SizedBox(height: 8.0,),
+                                  Row(
+                                    children: <Widget>[
+                                      Text("Station: ",
+                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                                      Text(data[index]["station"],
+                                        style: TextStyle(fontSize: 18),)
+                                    ],
+
+                                  ),
+                                ],
+
+                              ),
+                            )
+
+                        )
+                    )
+                  ],
+                ),
+
+              ),
+            );
+          }),
+
     );
   }
+
+  @override
+  void initState() {
+    super.initState();
+    this.getTrips();
+  }
+
+
+//
 }
-class Trip{
-  final String station;
-  final String number_plate;
-  final int passengers;
-  final int id;
-  final String time;
-  final String route;
-  final int fare;
-  Trip(this.station, this.number_plate, this.passengers, this.id, this.time, this.route, this.fare);
+
+
+class Trip {
+  String status;
+  List<Datum> data;
+
+  Trip({
+    this.status,
+    this.data,
+  });
+
+  factory Trip.fromJson(Map<String, dynamic> json) => new Trip(
+    status: json["status"],
+    data: new List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "status": status,
+    "data": new List<dynamic>.from(data.map((x) => x.toJson())),
+  };
 }
 
+class Datum {
+  int fare;
+  String station;
+  String driver;
+  int id;
+  DateTime time;
+  String route;
+  String staffName;
+  int passengers;
+  String conductor;
 
+  Datum({
+    this.fare,
+    this.station,
+    this.driver,
+    this.id,
+    this.time,
+    this.route,
+    this.staffName,
+    this.passengers,
+    this.conductor,
+  });
 
+  factory Datum.fromJson(Map<String, dynamic> json) => new Datum(
+    fare: json["fare"],
+    station: json["station"],
+    driver: json["driver"],
+    id: json["id"],
+    time: DateTime.parse(json["time"]),
+    route: json["route"],
+    staffName: json["staff_name"],
+    passengers: json["passengers"],
+    conductor: json["conductor"],
+  );
 
-
+  Map<String, dynamic> toJson() => {
+    "fare": fare,
+    "station": station,
+    "driver": driver,
+    "id": id,
+    "time": time.toIso8601String(),
+    "route": route,
+    "staff_name": staffName,
+    "passengers": passengers,
+    "conductor": conductor,
+  };
+}

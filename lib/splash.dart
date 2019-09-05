@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:flutter_app/loader.dart';
-
 import 'package:flutter/material.dart';
+import 'loader.dart';
+import 'dart:async';
+
+
 class Splash extends StatefulWidget {
   @override
   _SplashState createState() => _SplashState();
