@@ -45,7 +45,7 @@ class _SignupPageState extends State<SignupPage> {
     child: Column(
     children: <Widget>[
     Container(
-    width: MediaQuery.of(context).size.width,
+     width: MediaQuery.of(context).size.width,
     height: MediaQuery.of(context).size.height/2.5,
     decoration: BoxDecoration(
     gradient: LinearGradient(
@@ -60,7 +60,8 @@ class _SignupPageState extends State<SignupPage> {
     bottomLeft: Radius.circular(90),
 
     )
-    ),child: Column(
+    ),
+      child: Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
     Spacer(),
