@@ -1,11 +1,11 @@
-import 'dart:io';
-
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+void main(){
+  runApp(new TripDetails());
+}
 class TripDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,14 +27,11 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-//  String strStringData = "Trip Details";
-//  String dropdownValue;
   int currentTab = 0;
   PageOne one;
   PageTwo two;
   List<Widget> pages;
   Widget currentPage;
-
   @override
   void initState(){
     one = PageOne();
@@ -43,7 +40,6 @@ class _HomepageState extends State<Homepage> {
     currentPage = one;
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +72,8 @@ class _HomepageState extends State<Homepage> {
       ),
     );
   }
-
-
-
 }
+
 class PageOne extends StatefulWidget {
   @override
   _PageOneState createState() => _PageOneState();
@@ -89,10 +83,36 @@ class _PageOneState extends State<PageOne> {
   String strStringData = "Trip Details";
   String dropdownValue;
   final formKey = GlobalKey<FormState>();
+  static final CREATE_TRIP_URL = 'https://prodevmatatu.herokuapp.com/api/trip';
+  TextEditingController routeController = new TextEditingController();
+  TextEditingController passengersController = new TextEditingController();
+  TextEditingController fareController = new TextEditingController();
+  TextEditingController stationController = new TextEditingController();
+  TextEditingController driverController = new TextEditingController();
+  TextEditingController conductorController = new TextEditingController();
+  TextEditingController numberPlateController = new TextEditingController();
+  TextEditingController staffNameController = new TextEditingController();
+  String url = 'https://prodevmatatu.herokuapp.com/api/trip';
+  Future<String> makeRequest() async {
+    var response = await http
+        .post(Uri.encodeFull(url), body: json.encode({
+
+      "driver": driverController.text,
+      "conductor": conductorController.text,
+      "route": routeController.text,
+      "passengers": passengersController.text,
+      "staff_name": staffNameController.text,
+      "station": stationController.text,
+      "fare": fareController.text,
+    }), headers: { "content-type" : "application/json",
+      "accept" : "application/json",});
+    print(response.body);
+  }
   @override
   Widget build(BuildContext context) {
     final txtRoute = TextFormField(
       autocorrect: false,
+      controller: routeController,
       decoration: InputDecoration(
           labelText: "Route",
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -100,26 +120,43 @@ class _PageOneState extends State<PageOne> {
       ),
       validator: (str)=> str.length <=5 ? "Not a valid route!" : null,
     );
+    final txtStaffNameController = TextFormField(
+      autocorrect: false,
+      controller: staffNameController,
+      decoration: InputDecoration(
+          labelText: "Sacco Employee Name",
+          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+      ),
+      validator: (str)=> str.length <=5 ? "Not a valid route!" : null,
+    );
     final txtPassengers = TextFormField(
       autocorrect: false,
+      controller: passengersController,
       decoration: InputDecoration(
           labelText: "Number of Passengers",
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
       validator: (str)=> str.length < 1 ? "Not a valid number of passengers!" : null,
+      inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+      keyboardType: TextInputType.number,
     );
     final txtAmount = TextFormField(
       autocorrect: false,
+      controller: fareController,
       decoration: InputDecoration(
           labelText: "Fare",
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
       validator: (str)=> str.length < 1? "Not a valid fare!" : null,
+      inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+      keyboardType: TextInputType.number,
     );
     final txtStation = TextFormField(
       autocorrect: false,
+      controller: stationController,
       decoration: InputDecoration(
           labelText: "Station",
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -129,6 +166,7 @@ class _PageOneState extends State<PageOne> {
     );
     final txtDriver = TextFormField(
       autocorrect: false,
+      controller: driverController,
       decoration: InputDecoration(
           labelText: "Name of driver",
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -137,6 +175,7 @@ class _PageOneState extends State<PageOne> {
       validator: (str)=> str.length <=5 ? "Not a valid name for driver!" : null,
     );
     final txtConductor = TextFormField(
+      controller: conductorController,
       autocorrect: false,
       decoration: InputDecoration(
           labelText: "Name of conductor",
@@ -178,38 +217,29 @@ class _PageOneState extends State<PageOne> {
       },
     );
     final btnSubmit = RaisedButton(
-      color: Colors.white,
-
-      onPressed: () {
+      onPressed: () async {
         var form = formKey.currentState;
         if(form.validate()){
+          makeRequest();
           return  _showToast(context);
         }
-
       },
       child: Text("Submit", style: new TextStyle(
-        color: Colors.yellow,
         fontSize: 18.00,
       ),
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
-
     );
     return new Center(
-
-
       child : new ListView(
           shrinkWrap: true,
           padding: EdgeInsets.only(left: 25.0, right: 25.0),
           children:    <Widget>[
             new Text(strStringData,
               style: new TextStyle(
-
-//                  color: Color.fromARGB(0xFF, 0x42, 0xA5, 0xF5) ,
                   fontSize: 40.00
               ),
             ),
-
             new Form(
               key: formKey,
               child: Column(
@@ -227,50 +257,17 @@ class _PageOneState extends State<PageOne> {
                   SizedBox(height: 8.0,),
                   txtConductor,
                   SizedBox(height: 8.0,),
+                  txtStaffNameController,
+                  SizedBox(height: 20.0,),
                   txtAsset,
                   SizedBox(height: 20.0,),
                   btnSubmit
                 ],
               ),
-
             )
-
           ]
-
-
-
-
-//            children: <Widget>[
-//              new Text(strStringData,
-//                style: new TextStyle(
-//
-//                    color: Color.fromARGB(0xFF, 0x42, 0xA5, 0xF5) ,
-//                    fontSize: 40.00
-//                ),
-//              ),
-
-//              SizedBox(height: 20.0,
-//              ),
-//              txtRoute,
-//              SizedBox(height: 8.0,),
-//              txtPassengers,
-//              SizedBox(height: 8.0,),
-//              txtAmount,
-//              SizedBox(height: 8.0,),
-//              txtStation,
-//              SizedBox(height: 8.0,),
-//              txtDriver,
-//              SizedBox(height: 8.0,),
-//              txtConductor,
-//              SizedBox(height: 8.0,),
-//              txtAsset,
-//              SizedBox(height: 20.0,),
-//              btnSubmit
-
-//            ],
       ),
     );
-
   }
   void _showToast(BuildContext context) {
     final scaffold = Scaffold.of(context);
@@ -294,125 +291,191 @@ class _PageTwoState extends State<PageTwo> {
 
   final String url = 'https://prodevmatatu.herokuapp.com/api/trip';
   List data;
-
+  bool _isLoading = true;
   Future<String> getTrips() async {
     var res = await http.get(
         Uri.encodeFull(url), headers: {"Accept": "application/json"});
     setState(() {
       var resBody = json.decode(res.body);
       data = resBody["data"];
-      var passengers = "passengers".toString();
+      _isLoading = false;
     });
-
     return "Success";
   }
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      appBar:
-      AppBar(
-
-        title: Text("Records",
-          textAlign: TextAlign.center ,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),),
-
-      ),
-      body:
-      ListView.builder(
-          itemCount: data == null ? 0 : data.length,
-          itemBuilder: (BuildContext context, int index) {
-
-            return new Container(
-              child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+    if (_isLoading) {
+      return Scaffold(
+        body: Container(
+          padding: EdgeInsets.all(15.0),
+          child: Center(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Card(
-                        child: Container(
+                    Row(
+                      children: <Widget>[
+                        Text("Records ",
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        CircularProgressIndicator(),
+                      ],
+                    ),
 
-                            padding: EdgeInsets.all(15.0),
-                            child: Center(
-                              child: Column(
-                                children: <Widget>[
+                  ]
+              )
+          ),
+        ),
+      );
+    } else {
+      return Scaffold(
+        body:
+        ListView.builder(
+            itemCount: data == null ? 0 : data.length,
+            itemBuilder: (BuildContext context, int index) {
+              return new Container(
+                child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Card(
+                          child: Container(
+                              padding: EdgeInsets.all(15.0),
+                              child: Center(
+                                child: Column(
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Text("Records ",
+                                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+                                        ),
 
-                                  Row(
-                                    children: <Widget>[
-                                      Text("Time : ",
-                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                                      ),
-                                      Text(data[index]["time"],
-                                        style: TextStyle( fontSize: 18),)
-                                    ],
+                                      ],
 
-                                  ),
-                                  SizedBox(height: 8.0,),
-                                  Row(
-                                    children: <Widget>[
-                                      Text("Sacco staff : ",
-                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                      Text(data[index]["staff_name"],
-                                        style: TextStyle(fontSize: 18),)
-                                    ],
+                                    ),
+                                    SizedBox(height: 8.0,),
 
-                                  ),
-                                  SizedBox(height: 8.0,),
-                                  Row(
-                                    children: <Widget>[
-                                      Text("Route : ",
-                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                      Text(data[index]["route"],
-                                        style: TextStyle( fontSize: 18),)
-                                    ],
+                                    Row(
+                                      children: <Widget>[
+                                        Text("Time : ",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),
+                                        ),
+                                        Text(data[index]["time"],
+                                          style: TextStyle(fontSize: 18),)
+                                      ],
 
-                                  ),
-                                  SizedBox(height: 8.0,),
-                                  Row(
-                                    children: <Widget>[
-                                      Text("Driver : ",
-                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                      Text(data[index]["driver"],
-                                        style: TextStyle( fontSize: 18),)
-                                    ],
+                                    ),
+                                    SizedBox(height: 8.0,),
+                                    Row(
+                                      children: <Widget>[
+                                        Text("Sacco staff : ",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),),
+                                        Text(data[index]["staff_name"],
+                                          style: TextStyle(fontSize: 18),)
+                                      ],
 
-                                  ),
-                                  SizedBox(height: 8.0,),
-                                  Row(
-                                    children: <Widget>[
-                                      Text("Conductor : ",
-                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                      Text(data[index]["conductor"],
-                                        style: TextStyle( fontSize: 18),)
-                                    ],
+                                    ),
+                                    SizedBox(height: 8.0,),
+                                    Row(
+                                      children: <Widget>[
+                                        Text("Route : ",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),),
+                                        Text(data[index]["route"],
+                                          style: TextStyle(fontSize: 18),)
+                                      ],
 
-                                  ),
+                                    ),
+                                    SizedBox(height: 8.0,),
+                                    Row(
+                                      children: <Widget>[
+                                        Text("Driver : ",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),),
+                                        Text(data[index]["driver"],
+                                          style: TextStyle(fontSize: 18),)
+                                      ],
 
-                                  SizedBox(height: 8.0,),
-                                  Row(
-                                    children: <Widget>[
-                                      Text("Station: ",
-                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-                                      Text(data[index]["station"],
-                                        style: TextStyle(fontSize: 18),)
-                                    ],
+                                    ),
+                                    SizedBox(height: 8.0,),
+                                    Row(
+                                      children: <Widget>[
+                                        Text("Conductor : ",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),),
+                                        Text(data[index]["conductor"],
+                                          style: TextStyle(fontSize: 18),)
+                                      ],
 
-                                  ),
-                                ],
+                                    ),
 
-                              ),
-                            )
+                                    SizedBox(height: 8.0,),
+                                    Row(
+                                      children: <Widget>[
+                                        Text("Station: ",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),),
+                                        Text(data[index]["station"],
+                                          style: TextStyle(fontSize: 18),)
 
-                        )
-                    )
-                  ],
+                                      ],
+
+
+                                    ),
+                                    SizedBox(height: 8.0,),
+                                    Row(
+                                      children: <Widget>[
+                                        Text("Fare : ",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),),
+                                        Text((data[index]["fare"]).toString(),
+                                          style: TextStyle(fontSize: 18),)
+                                      ],
+
+                                    ),
+                                    SizedBox(height: 8.0,),
+                                    Row(
+                                      children: <Widget>[
+                                        Text("Passengers : ",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18),),
+                                        Text((data[index]["passengers"])
+                                            .toString(),
+                                          style: TextStyle(fontSize: 18),)
+                                      ],
+
+                                    )
+
+                                  ],
+
+                                ),
+                              )
+
+                          )
+                      )
+                    ],
+                  ),
+
                 ),
+              );
+            }),
 
-              ),
-            );
-          }),
-
-    );
+      );
+    }
   }
 
   @override
@@ -420,11 +483,7 @@ class _PageTwoState extends State<PageTwo> {
     super.initState();
     this.getTrips();
   }
-
-
-//
 }
-
 
 class Trip {
   String status;
