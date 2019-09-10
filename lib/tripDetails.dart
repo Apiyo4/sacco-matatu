@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -28,14 +27,11 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-//  String strStringData = "Trip Details";
-//  String dropdownValue;
   int currentTab = 0;
   PageOne one;
   PageTwo two;
   List<Widget> pages;
   Widget currentPage;
-
   @override
   void initState(){
     one = PageOne();
@@ -44,7 +40,6 @@ class _HomepageState extends State<Homepage> {
     currentPage = one;
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
