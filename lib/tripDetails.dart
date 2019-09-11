@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -27,11 +28,14 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+//  String strStringData = "Trip Details";
+//  String dropdownValue;
   int currentTab = 0;
   PageOne one;
   PageTwo two;
   List<Widget> pages;
   Widget currentPage;
+
   @override
   void initState(){
     one = PageOne();
@@ -41,15 +45,35 @@ class _HomepageState extends State<Homepage> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF258EA3),
+      body: Stack(
+        children: <Widget>[
+          Container(     // Background
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.18,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    Color(0xFF2D2B60),
+                    Color(0xFF2596A8)
+                  ],
+                ),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(90),
+                )
+            ),
+          ),
+
+          currentPage,   // Required some widget in between to float AppBar
+
+        ],
       ),
 
-      body: currentPage,
-//
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentTab,
         onTap: (int index){
@@ -72,8 +96,10 @@ class _HomepageState extends State<Homepage> {
       ),
     );
   }
-}
 
+
+
+}
 class PageOne extends StatefulWidget {
   @override
   _PageOneState createState() => _PageOneState();
@@ -83,6 +109,9 @@ class _PageOneState extends State<PageOne> {
   String strStringData = "Trip Details";
   String dropdownValue;
   final formKey = GlobalKey<FormState>();
+
+
+
   static final CREATE_TRIP_URL = 'https://prodevmatatu.herokuapp.com/api/trip';
   TextEditingController routeController = new TextEditingController();
   TextEditingController passengersController = new TextEditingController();
@@ -106,8 +135,12 @@ class _PageOneState extends State<PageOne> {
       "fare": fareController.text,
     }), headers: { "content-type" : "application/json",
       "accept" : "application/json",});
+
     print(response.body);
+
   }
+
+
   @override
   Widget build(BuildContext context) {
     final txtRoute = TextFormField(
@@ -217,34 +250,46 @@ class _PageOneState extends State<PageOne> {
       },
     );
     final btnSubmit = RaisedButton(
+
       onPressed: () async {
+
         var form = formKey.currentState;
         if(form.validate()){
           makeRequest();
           return  _showToast(context);
+
         }
+
       },
       child: Text("Submit", style: new TextStyle(
         fontSize: 18.00,
       ),
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
+
     );
     return new Center(
+
+
       child : new ListView(
           shrinkWrap: true,
           padding: EdgeInsets.only(left: 25.0, right: 25.0),
           children:    <Widget>[
-            new Text(strStringData,
+            SizedBox(height: 30.0,),
+            new Text(strStringData, textAlign: TextAlign.center,
               style: new TextStyle(
-                  fontSize: 40.00
+                fontSize: 40.00,
+                color: Colors.white,
               ),
             ),
+            SizedBox(height: 10.0,),
+
             new Form(
               key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+                  SizedBox(height: 50.0,),
                   txtRoute,
                   SizedBox(height: 8.0,),
                   txtPassengers,
@@ -264,10 +309,14 @@ class _PageOneState extends State<PageOne> {
                   btnSubmit
                 ],
               ),
+
             )
+
           ]
+
       ),
     );
+
   }
   void _showToast(BuildContext context) {
     final scaffold = Scaffold.of(context);
@@ -292,6 +341,7 @@ class _PageTwoState extends State<PageTwo> {
   final String url = 'https://prodevmatatu.herokuapp.com/api/trip';
   List data;
   bool _isLoading = true;
+
   Future<String> getTrips() async {
     var res = await http.get(
         Uri.encodeFull(url), headers: {"Accept": "application/json"});
@@ -300,179 +350,266 @@ class _PageTwoState extends State<PageTwo> {
       data = resBody["data"];
       _isLoading = false;
     });
+
     return "Success";
   }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     if (_isLoading) {
       return Scaffold(
-        body: Container(
-          padding: EdgeInsets.all(15.0),
-          child: Center(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text("Records ",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
-                        ),
+//        appBar: AppBar(
+//          title: Text('Records'),
+//        ),
+        body:
+        Stack(
+          children: <Widget>[
+            Container(     // Background
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.18,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                        Color(0xFF2D2B60),
+                        Color(0xFF2596A8)
                       ],
                     ),
-                    Row(
-                      children: <Widget>[
-                        CircularProgressIndicator(),
-                      ],
-                    ),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(90),
 
-                  ]
-              )
-          ),
+                    )
+                ),
+                child: Center(
+                  child: Text("Records", textAlign: TextAlign.end,
+                    style: new TextStyle(
+                      fontSize: 40.0,
+                      color: Colors.white,
+                    ),),
+                )
+            ),
+
+
+            Container(
+              padding: EdgeInsets.only(left: 30.0, top: 150.0),
+              child: Center(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Text("Loading ",
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            CircularProgressIndicator(),
+                          ],
+                        ),
+
+                      ]
+                  )
+
+              ),
+            ),   // Required some widget in between to float AppBar
+
+          ],
         ),
+
+
+
       );
     } else {
       return Scaffold(
         body:
-        ListView.builder(
-            itemCount: data == null ? 0 : data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return new Container(
-                child: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Card(
-                          child: Container(
-                              padding: EdgeInsets.all(15.0),
-                              child: Center(
-                                child: Column(
-                                  children: <Widget>[
-                                    Row(
-                                      children: <Widget>[
-                                        Text("Records ",
-                                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
-                                        ),
-
-                                      ],
-
-                                    ),
-                                    SizedBox(height: 8.0,),
-
-                                    Row(
-                                      children: <Widget>[
-                                        Text("Time : ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18),
-                                        ),
-                                        Text(data[index]["time"],
-                                          style: TextStyle(fontSize: 18),)
-                                      ],
-
-                                    ),
-                                    SizedBox(height: 8.0,),
-                                    Row(
-                                      children: <Widget>[
-                                        Text("Sacco staff : ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18),),
-                                        Text(data[index]["staff_name"],
-                                          style: TextStyle(fontSize: 18),)
-                                      ],
-
-                                    ),
-                                    SizedBox(height: 8.0,),
-                                    Row(
-                                      children: <Widget>[
-                                        Text("Route : ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18),),
-                                        Text(data[index]["route"],
-                                          style: TextStyle(fontSize: 18),)
-                                      ],
-
-                                    ),
-                                    SizedBox(height: 8.0,),
-                                    Row(
-                                      children: <Widget>[
-                                        Text("Driver : ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18),),
-                                        Text(data[index]["driver"],
-                                          style: TextStyle(fontSize: 18),)
-                                      ],
-
-                                    ),
-                                    SizedBox(height: 8.0,),
-                                    Row(
-                                      children: <Widget>[
-                                        Text("Conductor : ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18),),
-                                        Text(data[index]["conductor"],
-                                          style: TextStyle(fontSize: 18),)
-                                      ],
-
-                                    ),
-
-                                    SizedBox(height: 8.0,),
-                                    Row(
-                                      children: <Widget>[
-                                        Text("Station: ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18),),
-                                        Text(data[index]["station"],
-                                          style: TextStyle(fontSize: 18),)
-
-                                      ],
-
-
-                                    ),
-                                    SizedBox(height: 8.0,),
-                                    Row(
-                                      children: <Widget>[
-                                        Text("Fare : ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18),),
-                                        Text((data[index]["fare"]).toString(),
-                                          style: TextStyle(fontSize: 18),)
-                                      ],
-
-                                    ),
-                                    SizedBox(height: 8.0,),
-                                    Row(
-                                      children: <Widget>[
-                                        Text("Passengers : ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18),),
-                                        Text((data[index]["passengers"])
-                                            .toString(),
-                                          style: TextStyle(fontSize: 18),)
-                                      ],
-
-                                    )
-
-                                  ],
-
-                                ),
-                              )
-
-                          )
-                      )
-                    ],
-                  ),
-
+        Stack(
+          children: <Widget>[
+            Container(     // Background
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.18,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                        Color(0xFF2D2B60),
+                        Color(0xFF2596A8)
+                      ],
+                    ),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(90),
+                    )
                 ),
-              );
-            }),
+                child: Center(
+                  child: Text("Records", textAlign: TextAlign.end,
+                    style: new TextStyle(
+                      fontSize: 40.0,
+                      color: Colors.white,
+                    ),),
+                )
+            ),
+//    Container(
+//              child: Center(
+//                child: Column(
+//                  children: <Widget>[
+//                    ListView.builder(itemBuilder: null)
+//                  ],
+//                ),
+//              ),
+//
+//            ),
+
+            ListView.builder(
+                itemCount: data == null ? 0 : data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return new Container(
+                    child: Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Card(
+                              child: Container(
+
+                                  padding: EdgeInsets.all(15.0),
+                                  child: Center(
+                                    child: Column(
+                                      children: <Widget>[
+                                        Row(
+                                          children: <Widget>[
+                                            Text("Records ",
+                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+                                            ),
+
+                                          ],
+
+                                        ),
+                                        SizedBox(height: 8.0,),
+
+                                        Row(
+                                          children: <Widget>[
+                                            Text("Time : ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18),
+                                            ),
+                                            Text(data[index]["time"],
+                                              style: TextStyle(fontSize: 18),)
+                                          ],
+
+                                        ),
+                                        SizedBox(height: 8.0,),
+                                        Row(
+                                          children: <Widget>[
+                                            Text("Sacco staff : ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18),),
+                                            Text(data[index]["staff_name"],
+                                              style: TextStyle(fontSize: 18),)
+                                          ],
+
+                                        ),
+                                        SizedBox(height: 8.0,),
+                                        Row(
+                                          children: <Widget>[
+                                            Text("Route : ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18),),
+                                            Text(data[index]["route"],
+                                              style: TextStyle(fontSize: 18),)
+                                          ],
+
+                                        ),
+                                        SizedBox(height: 8.0,),
+                                        Row(
+                                          children: <Widget>[
+                                            Text("Driver : ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18),),
+                                            Text(data[index]["driver"],
+                                              style: TextStyle(fontSize: 18),)
+                                          ],
+
+                                        ),
+                                        SizedBox(height: 8.0,),
+                                        Row(
+                                          children: <Widget>[
+                                            Text("Conductor : ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18),),
+                                            Text(data[index]["conductor"],
+                                              style: TextStyle(fontSize: 18),)
+                                          ],
+
+                                        ),
+
+                                        SizedBox(height: 8.0,),
+                                        Row(
+                                          children: <Widget>[
+                                            Text("Station: ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18),),
+                                            Text(data[index]["station"],
+                                              style: TextStyle(fontSize: 18),)
+
+                                          ],
+
+
+                                        ),
+                                        SizedBox(height: 8.0,),
+                                        Row(
+                                          children: <Widget>[
+                                            Text("Fare : ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18),),
+                                            Text((data[index]["fare"]).toString(),
+                                              style: TextStyle(fontSize: 18),)
+                                          ],
+
+                                        ),
+                                        SizedBox(height: 8.0,),
+                                        Row(
+                                          children: <Widget>[
+                                            Text("Passengers : ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18),),
+                                            Text((data[index]["passengers"])
+                                                .toString(),
+                                              style: TextStyle(fontSize: 18),)
+                                          ],
+
+                                        )
+
+                                      ],
+
+                                    ),
+                                  )
+
+                              )
+                          )
+                        ],
+                      ),
+
+                    ),
+                  );
+                }),  // Required some widget in between to float AppBar
+
+          ],
+        ),
+
 
       );
     }
@@ -483,7 +620,11 @@ class _PageTwoState extends State<PageTwo> {
     super.initState();
     this.getTrips();
   }
+
+
+//
 }
+
 
 class Trip {
   String status;

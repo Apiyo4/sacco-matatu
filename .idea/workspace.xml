@@ -4,10 +4,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca262a55-9ab0-4783-8568-f812c4fb2c2f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/tripDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tripDetails.dart" afterDir="false" />
-    </list>
+    <list default="true" id="ca262a55-9ab0-4783-8568-f812c4fb2c2f" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -35,10 +32,9 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/tripDetails.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="349" column="8" lean-forward="true" selection-start-line="349" selection-start-column="8" selection-end-line="349" selection-end-column="8" />
+            <state>
               <folding>
-                <element signature="e#0#17#0" expanded="true" />
+                <element signature="e#1#40#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -77,10 +73,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="684" />
-    <option name="width" value="662" />
-    <option name="height" value="763" />
+    <option name="width" value="652" />
+    <option name="height" value="761" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -142,7 +138,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1366" height="768" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22424242" />
       <window_info id="Capture Tool" order="1" />
@@ -157,12 +152,12 @@
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Android Profiler" order="2" show_stripe_button="false" />
       <window_info anchor="bottom" id="Debug" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" weight="0.32919255" />
+      <window_info anchor="bottom" id="Run" order="4" weight="0.32919255" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Logcat" order="8" weight="0.32919255" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.18322982" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.5590062" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32919255" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="1" />
@@ -235,10 +230,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/tripDetails.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="349" column="8" lean-forward="true" selection-start-line="349" selection-start-column="8" selection-end-line="349" selection-end-column="8" />
+        <state>
           <folding>
-            <element signature="e#0#17#0" expanded="true" />
+            <element signature="e#1#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
