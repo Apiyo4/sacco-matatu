@@ -1,5 +1,9 @@
 
+import 'dart:convert';
+
+
 import 'package:flutter_app/api_sevices.dart';
+import 'package:flutter_app/post_login.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,11 +11,16 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'constants.dart';
 import 'main.dart';
+import 'api_sevices.dart';
 
 
 
 
 class Login extends StatelessWidget {
+
+  final Future<PostLogin> post;
+  Login({Key key, this.post}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,13 +37,38 @@ class Login extends StatelessWidget {
 class LoginPage extends StatefulWidget{
   @override
   _LoginPageState createState() => _LoginPageState();
+
+
 }
 class _LoginPageState extends State<LoginPage> {
+  final formKey = GlobalKey<FormState>();
 
 
-  TextEditingController _emailController = new TextEditingController();
+  static final CREATE_LOGINPOST_URL = 'https://prodevmatatu.herokuapp.com/api/user/login';
+
+  TextEditingController _emailController =new  TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
 
+  String url = 'https://prodevmatatu.herokuapp.com/api/user/login';
+
+  Future<String> loginUser() async {
+    var response = await http
+        .post(Uri.encodeFull(url), body:json.encode({
+
+      "email": _emailController.text,
+      "password_hash": _passwordController.text,
+    }), headers: { "content-type" : "application/json",
+      "accept" : "application/json",});
+
+    print(response.body);
+
+    final int statusCode =response.statusCode;
+    if (statusCode< 200 || statusCode>400 || json == null) {
+      throw new Exception (" Error while posting data ");
+    }
+
+
+  }
 
   @override
   void initState() {
@@ -141,6 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         child: TextField(
                           decoration: InputDecoration(
+
                             border: InputBorder.none,
                             icon: Icon(Icons.email,
                               color: Colors.grey,
@@ -173,6 +208,8 @@ class _LoginPageState extends State<LoginPage> {
                             ]
                         ),
                         child: TextField(
+                          autocorrect: false,
+                          obscureText: true,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             icon: Icon(Icons.vpn_key,
@@ -227,7 +264,52 @@ class _LoginPageState extends State<LoginPage> {
                           child: Center(
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.pushNamed(context, "/details");
+                                  if(_emailController.text.isEmpty || _passwordController.text.isEmpty){
+                                    showDialog(
+                                        builder:(context)=> AlertDialog(
+                                          title: Text('Failure'),
+                                          content: Text('You need to input the email and password'),
+                                          actions: <Widget>[FlatButton(
+                                            onPressed: (){Navigator.pop(context);},
+                                            child: Text('Ok'),
+                                          )],
+                                        ),
+                                      context: context
+                                    );
+                                    return;
+                                  }else{
+                                    loginUser();
+                                    Navigator.pushNamed(context, "/details");
+                                  }
+//                                  final post ={
+//                                    'email': _emailController.text,
+//                                    'password_hash': _passwordController.text
+//                                  };
+//                                  ApiService.addPost(post)
+//                                  .then((success){
+//                                    String title, text;
+//                                    if(success){
+//                                      title= "Success";
+//                                      text= "You have succesfully LoggedIn";
+//                                    }else{
+//                                      title= "Error";
+//                                      text= "An error occurred. Try again later";
+////                                    Navigator.pushNamed(context, "/details");
+//
+//
+//                                    }
+//                                    showDialog(
+//                                        builder:(context)=> AlertDialog(
+//                                          title: Text(title),
+//                                          content: Text(text),
+//                                          actions: <Widget>[FlatButton(
+//                                            onPressed: (){Navigator.pop(context);},
+//                                            child: Text('Ok'),
+//                                          )],
+//                                        ),
+//                                        context: context
+//                                    );
+//                                  });
                                 },
 
                                 child: Text('Login'.toUpperCase(),
@@ -276,3 +358,4 @@ class _LoginPageState extends State<LoginPage> {
 
 
 }
+void main() => runApp(LoginPage());
