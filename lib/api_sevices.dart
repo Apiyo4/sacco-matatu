@@ -1,31 +1,39 @@
 import 'dart:convert';
+import 'package:flutter_app/post_login.dart';
+import 'package:flutter_app/post_register.dart';
 import 'package:http/http.dart' as http;
 import 'constants.dart';
+import 'dart:async' show Future;
+import 'package:flutter/services.dart' show rootBundle;
 
 class ApiService {
-  static Future<List<dynamic>> getUserList() async {
-    try {
-      final response = await http.get('${Urls.BASE_API_URL}/login');
-      if (response.statusCode == 200) {
-        return json.decode(response.body);
-      } else {
-        return null;
-      }
-    } catch (ex) {
-      return null;
+  static Future<bool> createPost(Map<String, dynamic> post) async {
+    try{
+      final response = await http.post(
+          "${Urls.BASE_API_URL}/user/registration", body: post);
+      return response.statusCode == 201;
+    }
+    catch (e) {
+      return false;
     }
   }
 
-  static Future<List<dynamic>> postUserList() async {
+
+
+
+
+
+  static Future<bool> addPost(Map<String, dynamic> post) async {
+
     try {
-      final response = await http.post('${Urls.BASE_API_URL}/register');
-      if (response.statusCode == 200) {
-        return json.decode(response.body);
-      } else {
-        return null;
-      }
-    } catch (ex) {
-      return null;
+      final response = await http.post('${Urls.BASE_API_URL}/user/login', body: post);
+      return response.statusCode == 201;
+    }
+    catch (e) {
+      return false;
     }
   }
+
 }
+
+
