@@ -234,7 +234,7 @@ class _PageOneState extends State<PageOne> {
                   state.didChange(newValue);
                 });
               },
-              items: <String>['One', 'Two', 'Three', 'Four']
+              items: <String>['KBH897T', 'KBC348P', 'KBY675E', 'KAW234L']
                   .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
