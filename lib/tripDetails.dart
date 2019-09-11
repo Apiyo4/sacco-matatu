@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/recordsPage.dart';
 
 class TripDetails extends StatelessWidget {
@@ -8,12 +9,14 @@ class TripDetails extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title:"Matatu Sacco",
         home: new Homepage(),
-        theme: new ThemeData(
-            brightness: Brightness.light,
-            primaryColor: Colors.tealAccent
+        theme: ThemeData(
+//            brightness: Brightness.light,
+            primaryColor: Color(0xFFFB415B),
+            fontFamily: "Ubuntu"
         )
     );
   }
+
 }
 class Homepage extends StatefulWidget {
   @override
@@ -21,6 +24,11 @@ class Homepage extends StatefulWidget {
 }
 class _HomepageState extends State<Homepage> {
   String strStringData = "Trip Details";
+  @override
+  void initState() {
+    SystemChrome.setEnabledSystemUIOverlays([]);
+    super.initState();
+  }
 
 @override
 Widget build(BuildContext context) {
