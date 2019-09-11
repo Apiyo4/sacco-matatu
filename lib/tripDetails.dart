@@ -477,6 +477,7 @@ class _PageTwoState extends State<PageTwo> {
                           Card(
                               child: Container(
 
+
                                   padding: EdgeInsets.all(15.0),
                                   child: Center(
                                     child: Column(
