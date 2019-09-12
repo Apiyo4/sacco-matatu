@@ -10,8 +10,8 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="flutter_app"
-        android:icon="@mipmap/ic_launcher">
+        android:label="sacco matatu"
+        android:icon="@mipmap/matatu_sacco">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -12,7 +12,8 @@ class RecordsPage extends StatelessWidget
         home: new Text("Hello"),
         theme: new ThemeData(
             brightness: Brightness.light,
-            primaryColor: Colors.tealAccent
+            primaryColor: Colors.tealAccent,
+            fontFamily: "Ubuntu"
         )
     );
   }

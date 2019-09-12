@@ -232,11 +232,11 @@ class _LoginPageState extends State<LoginPage> {
                             padding: const EdgeInsets.only(
                                 top: 16, right: 32
                             ),
-                            child: Text('Forgot Password ?',
-                              style: TextStyle(
-                                  color: Colors.grey
-                              ),
-                            ),
+//                            child: Text('Forgot Password ?',
+//                              style: TextStyle(
+//                                  color: Colors.grey
+//                              ),
+//                            ),
 
                           ),
                         ),
