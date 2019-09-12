@@ -1,17 +1,11 @@
 
 import 'dart:convert';
-
-
-import 'package:flutter_app/api_sevices.dart';
 import 'package:flutter_app/post_login.dart';
-import 'package:flutter_app/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
-import 'constants.dart';
-import 'main.dart';
-import 'api_sevices.dart';
+
 
 
 
@@ -58,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
       "email": _emailController.text,
       "password_hash": _passwordController.text,
     }), headers: { "content-type" : "application/json",
-      "accept" : "application/json",});
+      "accept" : "application/json"});
 
     print(response.body);
 

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -14,7 +15,8 @@ class TripDetails extends StatelessWidget {
         home: new Homepage(),
         theme: new ThemeData(
             brightness: Brightness.light,
-            primaryColor: Colors.tealAccent
+            primaryColor: Color(0xFF2B4A76),
+            fontFamily: "Ubuntu"
         )
 
     );
@@ -51,19 +53,19 @@ class _HomepageState extends State<Homepage> {
         children: <Widget>[
           Container(     // Background
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.18,
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [
-                    Color(0xFF2D2B60),
-                    Color(0xFF2596A8)
-                  ],
-                ),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(90),
-                )
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  Color(0xFF2D2B60),
+                  Color(0xFF2596A8)
+                ],
+              ),
+//                borderRadius: BorderRadius.only(
+//                  bottomLeft: Radius.circular(90),
+//                )
             ),
           ),
 
@@ -131,6 +133,7 @@ class _PageOneState extends State<PageOne> {
       "staff_name": staffNameController.text,
       "station": stationController.text,
       "fare": fareController.text,
+      "number_plate": numberPlateController.text,
     }), headers: { "content-type" : "application/json",
       "accept" : "application/json",});
 
@@ -145,31 +148,42 @@ class _PageOneState extends State<PageOne> {
       autocorrect: false,
       controller: routeController,
       decoration: InputDecoration(
-          labelText: "Route",
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+        labelText: "Route",
+        labelStyle:
+        new TextStyle(color: Colors.white, fontSize: 16.0),
+        contentPadding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+//          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+
       ),
-      validator: (str)=> str.length <=5 ? "Not a valid route!" : null,
+
+
+
+
+      validator: (str)=> str.isEmpty ? "Not a valid route!" : null,
     );
     final txtStaffNameController = TextFormField(
       autocorrect: false,
       controller: staffNameController,
       decoration: InputDecoration(
-          labelText: "Sacco Employee Name",
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+        labelText: "Sacco Employee Name",
+        labelStyle:
+        new TextStyle(color: Colors.white, fontSize: 16.0),
+        contentPadding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+//          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
-      validator: (str)=> str.length <=5 ? "Not a valid route!" : null,
+      validator: (str)=> str.isEmpty ? "Not a valid route!" : null,
     );
     final txtPassengers = TextFormField(
       autocorrect: false,
       controller: passengersController,
       decoration: InputDecoration(
-          labelText: "Number of Passengers",
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+        labelText: "Number of Passengers",
+        labelStyle:
+        new TextStyle(color: Colors.white, fontSize: 16.0),
+        contentPadding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+//          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
-      validator: (str)=> str.length < 1 ? "Not a valid number of passengers!" : null,
+      validator: (str)=> str.isEmpty ? "Not a valid number of passengers!" : null,
       inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
       keyboardType: TextInputType.number,
     );
@@ -177,11 +191,13 @@ class _PageOneState extends State<PageOne> {
       autocorrect: false,
       controller: fareController,
       decoration: InputDecoration(
-          labelText: "Fare",
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+        labelText: "Fare",
+        labelStyle:
+        new TextStyle(color: Colors.white, fontSize: 16.0),
+        contentPadding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+//          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
-      validator: (str)=> str.length < 1? "Not a valid fare!" : null,
+      validator: (str)=> str.isEmpty? "Not a valid fare!" : null,
       inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
       keyboardType: TextInputType.number,
     );
@@ -189,63 +205,49 @@ class _PageOneState extends State<PageOne> {
       autocorrect: false,
       controller: stationController,
       decoration: InputDecoration(
-          labelText: "Station",
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+        labelText: "Station",
+        labelStyle:
+        new TextStyle(color: Colors.white, fontSize: 16.0),
+        contentPadding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+//          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
-      validator: (str)=> str.length <=5 ? "Not a valid station!" : null,
+      validator: (str)=> str.isEmpty ? "Not a valid station!" : null,
     );
     final txtDriver = TextFormField(
       autocorrect: false,
       controller: driverController,
       decoration: InputDecoration(
-          labelText: "Name of driver",
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+        labelText: "Name of driver",
+        labelStyle:
+        new TextStyle(color: Colors.white, fontSize: 16.0),
+        contentPadding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+//          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
-      validator: (str)=> str.length <=5 ? "Not a valid name for driver!" : null,
+      validator: (str)=> str.isEmpty ? "Not a valid name for driver!" : null,
     );
     final txtConductor = TextFormField(
       controller: conductorController,
       autocorrect: false,
       decoration: InputDecoration(
-          labelText: "Name of conductor",
+        labelText: "Name of conductor",
+        labelStyle:
+        new TextStyle(color: Colors.white, fontSize: 16.0),
+        contentPadding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+//          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
+      ),
+      validator: (str)=> str.isEmpty ? "Not a valid name for conductor!" : null,
+    );
+    final txtAsset = TextFormField(
+      controller: numberPlateController,
+      autocorrect: false,
+      decoration: InputDecoration(
+          labelText: "Number plate",
+          labelStyle:
+          new TextStyle(color: Colors.white, fontSize: 16.0),
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(borderRadius:BorderRadius.circular(30.0))
       ),
-      validator: (str)=> str.length <=5 ? "Not a valid name for conductor!" : null,
-    );
-    final txtAsset = FormField<String>(
-      builder: (FormFieldState<String> state) {
-        return InputDecorator(
-          decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 3.0),
-              errorStyle: TextStyle(color: Colors.redAccent, fontSize: 16.0),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0))),
-          isEmpty: dropdownValue == '',
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              hint: new Text('Number plate'),
-              value: dropdownValue,
-              isDense: true,
-              onChanged: (String newValue) {
-                setState(() {
-                  dropdownValue = newValue;
-                  state.didChange(newValue);
-                });
-              },
-              items: <String>['KBH897T', 'KBC348P', 'KBY675E', 'KAW234L']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              })
-                  .toList(),
-            ),
-          ),
-        );
-      },
+      validator: (str)=> str.isEmpty? "Not a valid number plate!" : null,
     );
     final btnSubmit = RaisedButton(
 
@@ -259,8 +261,13 @@ class _PageOneState extends State<PageOne> {
         }
 
       },
-      child: Text("Submit", style: new TextStyle(
-        fontSize: 18.00,
+      color: Colors.white,
+      textColor:Color(0xFF2D2B60),
+      padding: EdgeInsets.fromLTRB(120, 10, 120, 10),
+      elevation: 20,
+      child: Text('submit'.toUpperCase(), style: new TextStyle(
+          fontSize: 18.00,
+          fontWeight: FontWeight.bold
       ),
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
@@ -322,7 +329,7 @@ class _PageOneState extends State<PageOne> {
       SnackBar(
         content: const Text('Trip details saved'),
         action: SnackBarAction(
-            label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+            label: 'CLOSE', onPressed: scaffold.hideCurrentSnackBar),
       ),
     );
   }
@@ -360,53 +367,58 @@ class _PageTwoState extends State<PageTwo> {
     // TODO: implement build
     if (_isLoading) {
       return Scaffold(
+
 //        appBar: AppBar(
 //          title: Text('Records'),
 //        ),
         body:
         Stack(
+
           children: <Widget>[
             Container(     // Background
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.18,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        Color(0xFF2D2B60),
-                        Color(0xFF2596A8)
-                      ],
-                    ),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(90),
-
-                    )
+//                width: MediaQuery.of(context).size.width,
+//                height: MediaQuery.of(context).size.height * 0.18,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    Color(0xFF2D2B60),
+                    Color(0xFF2596A8)
+                  ],
                 ),
-                child: Center(
-                  child: Text("Records", textAlign: TextAlign.end,
-                    style: new TextStyle(
-                      fontSize: 40.0,
-                      color: Colors.white,
-                    ),),
-                )
+//                    borderRadius: BorderRadius.only(
+//                      bottomLeft: Radius.circular(90),
+//
+//                    )
+              ),
+//                child: Center(
+//                  child: Text("Records", textAlign: TextAlign.end,
+//                    style: new TextStyle(
+//                      fontSize: 40.0,
+//                      color: Colors.white,
+//                    ),),
+//                )
             ),
 
 
             Container(
-              padding: EdgeInsets.only(left: 30.0, top: 150.0),
+
+//              padding: EdgeInsets.only(left: 30.0, top: 150.0),
               child: Center(
                   child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text("Loading ",
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+                            Text("Records ",
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40, color: Colors.white, fontFamily: "Ubuntu"),
                             ),
                           ],
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             CircularProgressIndicator(),
                           ],
@@ -430,26 +442,28 @@ class _PageTwoState extends State<PageTwo> {
         Stack(
           children: <Widget>[
             Container(     // Background
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.18,
+//                width: MediaQuery.of(context).size.width,
+//                height: MediaQuery.of(context).size.height * 0.18,
                 decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        Color(0xFF2D2B60),
-                        Color(0xFF2596A8)
-                      ],
-                    ),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(90),
-                    )
+                  gradient: LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Color(0xFF2D2B60),
+                      Color(0xFF2596A8)
+                    ],
+
+                  ),
+//                    borderRadius: BorderRadius.only(
+//                      bottomLeft: Radius.circular(90),
+//                    )
                 ),
                 child: Center(
                   child: Text("Records", textAlign: TextAlign.end,
                     style: new TextStyle(
-                      fontSize: 40.0,
-                      color: Colors.white,
+                        fontSize: 40.0,
+                        color: Colors.white,
+                        fontFamily: "Ubuntu"
                     ),),
                 )
             ),
@@ -473,7 +487,20 @@ class _PageTwoState extends State<PageTwo> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           Card(
+                              margin: EdgeInsets.only(left: 15, top: 10, right: 15, bottom: 20),
+                              elevation: 30.0,
+                              shape: BeveledRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+//                            color: Color(0xFF2D2B60),
+
+
+
+//                            color: Colors.blue,
+
                               child: Container(
+
+
 
                                   padding: EdgeInsets.all(15.0),
                                   child: Center(
@@ -482,7 +509,7 @@ class _PageTwoState extends State<PageTwo> {
                                         Row(
                                           children: <Widget>[
                                             Text("Records ",
-                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21,fontFamily: "Ubuntu"),
                                             ),
 
                                           ],
@@ -495,10 +522,10 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Time : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),
                                             ),
                                             Text(data[index]["time"],
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         ),
@@ -508,9 +535,9 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Sacco staff : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text(data[index]["staff_name"],
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         ),
@@ -520,9 +547,9 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Route : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text(data[index]["route"],
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         ),
@@ -532,9 +559,9 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Driver : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text(data[index]["driver"],
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         ),
@@ -544,9 +571,9 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Conductor : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text(data[index]["conductor"],
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         ),
@@ -557,9 +584,9 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Station: ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text(data[index]["station"],
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
 
                                           ],
 
@@ -571,9 +598,9 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Fare : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text((data[index]["fare"]).toString(),
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         ),
@@ -583,10 +610,10 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Passengers : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text((data[index]["passengers"])
                                                 .toString(),
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         )

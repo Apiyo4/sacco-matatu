@@ -1,10 +1,7 @@
-import 'dart:convert';
-import 'package:flutter_app/post_login.dart';
-import 'package:flutter_app/post_register.dart';
 import 'package:http/http.dart' as http;
 import 'constants.dart';
 import 'dart:async' show Future;
-import 'package:flutter/services.dart' show rootBundle;
+
 
 class ApiService {
   static Future<bool> createPost(Map<String, dynamic> post) async {

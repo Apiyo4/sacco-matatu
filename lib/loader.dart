@@ -1,8 +1,5 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'dart:math';
-
 
 class Loader extends StatefulWidget {
   @override
