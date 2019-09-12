@@ -146,6 +146,9 @@ class _PageOneState extends State<PageOne> {
   @override
   Widget build(BuildContext context) {
     final txtRoute = TextFormField(
+      style: TextStyle(
+        color: Colors.teal,
+      ),
       autocorrect: false,
       controller: routeController,
       decoration: InputDecoration(
@@ -163,6 +166,9 @@ class _PageOneState extends State<PageOne> {
       validator: (str)=> str.length <=5 ? "Not a valid route!" : null,
     );
     final txtStaffNameController = TextFormField(
+      style: TextStyle(
+        color: Colors.teal,
+      ),
       autocorrect: false,
       controller: staffNameController,
       decoration: InputDecoration(
@@ -175,6 +181,9 @@ class _PageOneState extends State<PageOne> {
       validator: (str)=> str.length <=5 ? "Not a valid route!" : null,
     );
     final txtPassengers = TextFormField(
+      style: TextStyle(
+        color: Colors.teal,
+      ),
       autocorrect: false,
       controller: passengersController,
       decoration: InputDecoration(
@@ -189,6 +198,9 @@ class _PageOneState extends State<PageOne> {
       keyboardType: TextInputType.number,
     );
     final txtAmount = TextFormField(
+      style: TextStyle(
+        color: Colors.teal,
+      ),
       autocorrect: false,
       controller: fareController,
       decoration: InputDecoration(
@@ -203,6 +215,9 @@ class _PageOneState extends State<PageOne> {
       keyboardType: TextInputType.number,
     );
     final txtStation = TextFormField(
+      style: TextStyle(
+        color: Colors.teal,
+      ),
       autocorrect: false,
       controller: stationController,
       decoration: InputDecoration(
@@ -215,6 +230,9 @@ class _PageOneState extends State<PageOne> {
       validator: (str)=> str.length <=5 ? "Not a valid station!" : null,
     );
     final txtDriver = TextFormField(
+      style: TextStyle(
+        color: Colors.teal,
+      ),
       autocorrect: false,
       controller: driverController,
       decoration: InputDecoration(
@@ -227,6 +245,9 @@ class _PageOneState extends State<PageOne> {
       validator: (str)=> str.length <=5 ? "Not a valid name for driver!" : null,
     );
     final txtConductor = TextFormField(
+      style: TextStyle(
+        color: Colors.teal,
+      ),
       controller: conductorController,
       autocorrect: false,
       decoration: InputDecoration(
@@ -239,6 +260,7 @@ class _PageOneState extends State<PageOne> {
       validator: (str)=> str.length <=5 ? "Not a valid name for conductor!" : null,
     );
     final txtAsset = FormField<String>(
+
       builder: (FormFieldState<String> state) {
         return InputDecorator(
           decoration: InputDecoration(
@@ -250,6 +272,7 @@ class _PageOneState extends State<PageOne> {
           isEmpty: dropdownValue == '',
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
+
               hint: new Text('Number plate', style: TextStyle(
                   color: Colors.white,
                   fontSize: 18
@@ -268,7 +291,9 @@ class _PageOneState extends State<PageOne> {
                   .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
-                  child: Text(value),
+                  child: Text(value, style: TextStyle(
+                    color: Colors.teal,
+                  ),),
                 );
               })
                   .toList(),
@@ -395,11 +420,13 @@ class _PageTwoState extends State<PageTwo> {
     // TODO: implement build
     if (_isLoading) {
       return Scaffold(
+
 //        appBar: AppBar(
 //          title: Text('Records'),
 //        ),
         body:
         Stack(
+
           children: <Widget>[
             Container(     // Background
 //                width: MediaQuery.of(context).size.width,
@@ -429,6 +456,7 @@ class _PageTwoState extends State<PageTwo> {
 
 
             Container(
+
 //              padding: EdgeInsets.only(left: 30.0, top: 150.0),
               child: Center(
                   child: Column(
@@ -438,7 +466,7 @@ class _PageTwoState extends State<PageTwo> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text("Records ",
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40, color: Colors.white),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40, color: Colors.white, fontFamily: "Ubuntu"),
                             ),
                           ],
                         ),
@@ -477,6 +505,7 @@ class _PageTwoState extends State<PageTwo> {
                         Color(0xFF2D2B60),
                         Color(0xFF2596A8)
                       ],
+
                     ),
 //                    borderRadius: BorderRadius.only(
 //                      bottomLeft: Radius.circular(90),
@@ -487,6 +516,7 @@ class _PageTwoState extends State<PageTwo> {
                     style: new TextStyle(
                       fontSize: 40.0,
                       color: Colors.white,
+                        fontFamily: "Ubuntu"
                     ),),
                 )
             ),
@@ -532,7 +562,7 @@ class _PageTwoState extends State<PageTwo> {
                                         Row(
                                           children: <Widget>[
                                             Text("Records ",
-                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21,fontFamily: "Ubuntu"),
                                             ),
 
                                           ],
@@ -545,10 +575,10 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Time : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),
                                             ),
                                             Text(data[index]["time"],
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         ),
@@ -558,9 +588,9 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Sacco staff : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text(data[index]["staff_name"],
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         ),
@@ -570,9 +600,9 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Route : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text(data[index]["route"],
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         ),
@@ -582,9 +612,9 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Driver : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text(data[index]["driver"],
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         ),
@@ -594,9 +624,9 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Conductor : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text(data[index]["conductor"],
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         ),
@@ -607,9 +637,9 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Station: ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text(data[index]["station"],
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
 
                                           ],
 
@@ -621,9 +651,9 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Fare : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text((data[index]["fare"]).toString(),
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         ),
@@ -633,10 +663,10 @@ class _PageTwoState extends State<PageTwo> {
                                             Text("Passengers : ",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18),),
+                                                  fontSize: 18,fontFamily: "Ubuntu"),),
                                             Text((data[index]["passengers"])
                                                 .toString(),
-                                              style: TextStyle(fontSize: 18),)
+                                              style: TextStyle(fontSize: 18,fontFamily: "Ubuntu"),)
                                           ],
 
                                         )
