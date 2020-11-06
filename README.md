@@ -1,6 +1,6 @@
 # Sacco Matatu
 
-This is a cross-platform mobile application that enable the sacco employees to enter matatu trip details. 
+This is a cross-platform mobile application that enables the Sacco employees to enter matatu trip details. 
 
 ## Tech Used
 Flutter, HTML,Javascript, CSS, Python, Flask
